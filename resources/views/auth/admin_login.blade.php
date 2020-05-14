@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -9,7 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
+     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet">
@@ -36,7 +37,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.bootstrap4.min.css">
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.dataTables.min.css">
    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
@@ -46,7 +46,6 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
-   <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>
 
 
     <!-- FullCalendar -->
@@ -66,7 +65,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-minimal.css">
 
-
+     <link href="{{ asset('css/intlTelInput.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -90,30 +89,31 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif -->
                         @else
                             <li class="nav-item dropdown">
-                                <div class="sidenav_mobile">
-                                    <a href="/client" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'client') ? 'active' : '' }}">Calendar</a>
-                                    <a href="/projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'projects') ? 'active' : '' }}">Projects</a>
-                                    <a href="/add_projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'add_projects') ? 'active' : '' }}">Add A Project</a>
-                                </div>
-                                <a type="button" class="a_nav" href="{{ route('logout') }}" 
-                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        
-                                <i class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>Logout</a>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                </form>
+                                    </form>
+                                </div>
                             </li>
                         @endguest
                     </ul>
@@ -123,56 +123,70 @@
 
         <main class="py-4">
             <div class="container">
-                <div class="row main">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <img src="{{ asset('images/logo.png') }}" class="picture center">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="">Admin {{ __('Login') }}</div>
+
+                            <div class="card-body">
+                                <form method="POST" action="{{ route('admin.login.submit') }}">
+                                    @csrf
+
+                                    <div class="form-group row">
+                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6 offset-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                                <label class="form-check-label" for="remember">
+                                                    {{ __('Remember Me') }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-8 offset-md-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Login') }}
+                                            </button>
+
+                                            @if (Route::has('password.request'))
+                                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                    {{ __('Forgot Your Password?') }}
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12 sidenav">
-                                <!-- <div class="sidebar-heading">Navigation </div> -->
-                                <a href="/client" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'client') ? 'active' : '' }}">Calendar</a>
-                                <a href="/projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'projects') ? 'active' : '' }}">Projects</a>
-                                <a href="/add_projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'add_projects') ? 'active' : '' }}">Add A Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 main_content">
-                        <div class="row welcome_header">
-                            <div class="row">
-                                <div class="col-xl-12 welcome_text">
-                                    <h5 class="welcome">Welcome!</h5>
-                                    <h2 class="client_name">
-                                        @if ( Auth::check() )
-                                            {{ Auth::user()->name }}
-                                        @else
-                                            return redirect('login');
-                                        @endif
-                                        
-                                    </h2>
-                                    <h6 class="client_address"><i class="fa fa-map" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>
-                                        @if ( Auth::check() )
-                                            {{ Auth::user()->client_address }}
-                                        @else
-                                            return redirect('login');
-                                        @endif
-                                        
-                                    </h6>
-                                    <h6 class="client_address"><i class="fa fa-phone" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>
-                                        @if ( Auth::check() )
-                                            {{ Auth::user()->phone_number }}
-                                        @else
-                                            return redirect('login');
-                                        @endif
-                                        
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row jobs_wrapper">
-                            @yield('jcontent')
                         </div>
                     </div>
                 </div>
@@ -180,7 +194,7 @@
         </main>
     </div>
 
-    <!-- Popper.JS -->
+     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
@@ -190,15 +204,18 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.1/interaction/main.js" integrity="sha256-8M6FzVt1+EcYNYqAJqg0kameW+aOR5l7xAfksE2J+hI=" crossorigin="anonymous"></script>
-    
+
+    <script src="{{ asset('js/intlTelInput-jquery.js') }}"></script>
 
     <!-- Menu Toggle Script -->
-    <!-- <script>
-        $("#menu-toggle").click(function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled");
-        });
-    </script> -->
+
+    <script>
+ 
+    $("#phone_number").intlTelInput({
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js"
+    });
+ 
+  </script>
 
 </body>
 </html>

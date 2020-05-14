@@ -36,7 +36,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.bootstrap4.min.css">
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.dataTables.min.css">
    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
@@ -46,7 +45,6 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
-   <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>
 
 
     <!-- FullCalendar -->
@@ -88,7 +86,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                        
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -101,9 +99,8 @@
                         @else
                             <li class="nav-item dropdown">
                                 <div class="sidenav_mobile">
-                                    <a href="/client" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'client') ? 'active' : '' }}">Calendar</a>
-                                    <a href="/projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'projects') ? 'active' : '' }}">Projects</a>
-                                    <a href="/add_projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'add_projects') ? 'active' : '' }}">Add A Project</a>
+                                   <a href="/admin_main" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_main') ? 'active' : '' }}">Calendar</a>
+                                    <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
                                 </div>
                                 <a type="button" class="a_nav" href="{{ route('logout') }}" 
                                     onclick="event.preventDefault();
@@ -132,10 +129,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-12 sidenav">
-                                <!-- <div class="sidebar-heading">Navigation </div> -->
-                                <a href="/client" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'client') ? 'active' : '' }}">Calendar</a>
-                                <a href="/projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'projects') ? 'active' : '' }}">Projects</a>
-                                <a href="/add_projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'add_projects') ? 'active' : '' }}">Add A Project</a>
+                                <a href="/admin_main" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_main') ? 'active' : '' }}">Calendar</a>
+                                <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
                             </div>
                         </div>
                     </div>
@@ -143,7 +138,7 @@
                         <div class="row welcome_header">
                             <div class="row">
                                 <div class="col-xl-12 welcome_text">
-                                    <h5 class="welcome">Welcome!</h5>
+                                    <h5>Welcome! Admin</h5>
                                     <h2 class="client_name">
                                         @if ( Auth::check() )
                                             {{ Auth::user()->name }}
@@ -152,17 +147,9 @@
                                         @endif
                                         
                                     </h2>
-                                    <h6 class="client_address"><i class="fa fa-map" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>
+                                    <h6 class="client_address"><i class="fa fa-envelope" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>
                                         @if ( Auth::check() )
-                                            {{ Auth::user()->client_address }}
-                                        @else
-                                            return redirect('login');
-                                        @endif
-                                        
-                                    </h6>
-                                    <h6 class="client_address"><i class="fa fa-phone" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>
-                                        @if ( Auth::check() )
-                                            {{ Auth::user()->phone_number }}
+                                            {{ Auth::user()->email }}
                                         @else
                                             return redirect('login');
                                         @endif
@@ -172,7 +159,7 @@
                             </div>
                         </div>
                         <div class="row jobs_wrapper">
-                            @yield('jcontent')
+                            @yield('admin_content')
                         </div>
                     </div>
                 </div>
