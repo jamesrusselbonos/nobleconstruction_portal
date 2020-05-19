@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Noble Construction Portal</title>
 
      <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -64,16 +64,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-minimal.css">
 
-     <link href="{{ asset('css/intlTelInput.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/intlTelInput.css') }}" rel="stylesheet">
 
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     Noble Construction Portal
-                </a>
+                </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -89,11 +89,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a style="width: 100px; text-align: center;" class="nav-link list-group-item list-group-item-action {{ (request()->segment(1) == 'login') ? 'active' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a style="width: 100px; text-align: center;" class="nav-link list-group-item list-group-item-action {{ (request()->segment(1) == 'register') ? 'active' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -136,7 +136,16 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.1/interaction/main.js" integrity="sha256-8M6FzVt1+EcYNYqAJqg0kameW+aOR5l7xAfksE2J+hI=" crossorigin="anonymous"></script>
 
-    <script src="{{ asset('js/intlTelInput-jquery.js') }}"></script>
+    <!-- <script src="{{ asset('js/intlTelInput-jquery.js') }}"></script> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/css/intlTelInput.css" rel="stylesheet" /> -->
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/intlTelInput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
+
 
     <!-- Menu Toggle Script -->
 
@@ -144,6 +153,44 @@
  
     $("#phone_number").intlTelInput({
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js"
+    });
+
+    /* INITIALIZE BOTH INPUTS WITH THE intlTelInput FEATURE*/
+
+    $("#phone1").intlTelInput({
+        initialCountry: "us",
+        separateDialCode: true,
+        preferredCountries: ["fr", "us", "gb"],
+        geoIpLookup: function (callback) {
+            $.get('https://ipinfo.io', function () {
+            }, "jsonp").always(function (resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                callback(countryCode);
+            });
+        },
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+    });
+
+
+    $("#hiden").intlTelInput({
+        initialCountry: "us",
+        dropdownContainer: 'body',
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+    });
+
+
+    /* ADD A MASK IN PHONE1 INPUT (when document ready and when changing flag) FOR A BETTER USER EXPERIENCE */
+
+    var mask1 = $("#phone1").attr('placeholder').replace(/[0-9]/g, 0);
+
+    $(document).ready(function () {
+        $('#phone1').mask(mask1)
+    });
+
+    $("#phone1").on("countrychange", function (e, countryData) {
+        $("#phone1").val('');
+        var mask1 = $("#phone1").attr('placeholder').replace(/[0-9]/g, 0);
+        $('#phone1').mask(mask1);
     });
  
   </script>
