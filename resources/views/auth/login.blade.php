@@ -3,16 +3,25 @@
 @section('content')
 <div class="container">
     <div class="row" style="padding-top: 60px;">
-        <div class="col-md-7" style="padding-top: 50px;">
-            <h5>Welcome!</h5>
-            <h2 class="" style="font-weight: bold;">
-                NOBLE CONSTRUCTION PORTAL
-            </h2>
-            <h6 class="client_address">
-                From the blueprints to the finishing touches, Noble offers peace of mind
-            </h6>
+        <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12" style="padding-top: 50px;">
+            <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                    <img src="{{ asset('images/logo.png') }}" class="picture2">
+                    
+                    
+                </div>
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10" style="padding-left: 35px; padding-right: 25px;">
+                    <h5>Welcome!</h5>
+                    <h2 class="" style="font-weight: bold; font-size: 3em;">
+                        NOBLE CONSTRUCTION PORTAL
+                    </h2>
+                    <h6 class="client_address" style="padding-right: 50px;">
+                        From the blueprints to the finishing touches, Noble offers peace of mind
+                    </h6>
+                </div>
+            </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
             <div class="card">
                 <!-- <div class="card-header">{{ __('Login') }}</div> -->
 

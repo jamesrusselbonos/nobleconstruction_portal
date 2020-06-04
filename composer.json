@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "pulkitjalan/google-apiclient": "^4.1",
-        "revolution/laravel-google-sheets": "^5.3"
+        "revolution/laravel-google-sheets": "^5.3",
+        "yajra/laravel-datatables-oracle": "^9.10"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Noble Construction Portal</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -36,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.bootstrap4.min.css">
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap.min.css">
    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
@@ -45,6 +46,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
+   <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
 
 
     <!-- FullCalendar -->
@@ -69,13 +71,15 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Noble Construction Portal
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon">
+                        <i class="fa fa-bars" style="color:#fff; font-size:28px;"></i>
+                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -100,7 +104,10 @@
                             <li class="nav-item dropdown">
                                 <div class="sidenav_mobile">
                                    <a href="/admin_main" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_main') ? 'active' : '' }}">Calendar</a>
-                                    <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
+                                   <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
+                                   <a href="/manage_customers" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_customers') ? 'active' : '' }}">Customers</a>
+                                   <a href="/orders" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'orders') ? 'active' : '' }}">Orders</a>
+                                   <a href="/services" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'services') ? 'active' : '' }}">Services</a>
                                 </div>
                                 <a type="button" class="a_nav" href="{{ route('logout') }}" 
                                     onclick="event.preventDefault();
@@ -121,23 +128,13 @@
         <main class="py-4">
             <div class="container">
                 <div class="row main">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                    <div class="col-xl-12">
                         <div class="row">
-                            <div class="col-xl-12">
-                                <img src="{{ asset('images/logo.png') }}" class="picture center">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                                <img src="{{ asset('images/logo.png') }}" class="picture center">  
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12 sidenav">
-                                <a href="/admin_main" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_main') ? 'active' : '' }}">Calendar</a>
-                                <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 main_content">
-                        <div class="row welcome_header">
-                            <div class="row">
-                                <div class="col-xl-12 welcome_text">
+                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 ">
+                                <div class="header_wrapper">
                                     <h5>Welcome! Admin</h5>
                                     <h2 class="client_name">
                                         @if ( Auth::check() )
@@ -158,8 +155,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row jobs_wrapper">
-                            @yield('admin_content')
+                        <div class="row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                <div class="sidenav">
+                                   <a href="/admin_main" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_main') ? 'active' : '' }}">Calendar</a>
+                                   <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
+                                   <a href="/manage_customers" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_customers') ? 'active' : '' }}">Customers</a>
+                                   <a href="/orders" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'orders') ? 'active' : '' }}">Orders</a>
+                                   <a href="/services" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'services') ? 'active' : '' }}">Services</a>
+                                </div>
+                            </div>
+                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
+                                <div class="jobs_wrapper">
+                                    @yield('admin_content')
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

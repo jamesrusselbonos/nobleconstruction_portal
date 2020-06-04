@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Noble Construction Portal</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -71,13 +71,15 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Noble Construction Portal
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon">
+                        <i class="fa fa-bars" style="color:#fff; font-size:28px;"></i>
+                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -103,6 +105,7 @@
                                 <div class="sidenav_mobile">
                                     <a href="/client" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'client') ? 'active' : '' }}">Calendar</a>
                                     <a href="/projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'projects') ? 'active' : '' }}">Projects</a>
+                                    <a href="/order_overview" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'order_overview') ? 'active' : '' }}">Orders</a>
                                     <a href="/add_projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'add_projects') ? 'active' : '' }}">Add A Project</a>
                                 </div>
                                 <a type="button" class="a_nav" href="{{ route('logout') }}" 
@@ -124,25 +127,13 @@
         <main class="py-4">
             <div class="container">
                 <div class="row main">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                    <div class="col-xl-12">
                         <div class="row">
-                            <div class="col-xl-12">
-                                <img src="{{ asset('images/logo.png') }}" class="picture center">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                                <img src="{{ asset('images/logo.png') }}" class="picture center">  
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12 sidenav">
-                                <!-- <div class="sidebar-heading">Navigation </div> -->
-                                <a href="/client" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'client') ? 'active' : '' }}">Calendar</a>
-                                <a href="/projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'projects') ? 'active' : '' }}">Projects</a>
-                                <a href="/add_projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'add_projects') ? 'active' : '' }}">Add A Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 main_content">
-                        <div class="row welcome_header">
-                            <div class="row">
-                                <div class="col-xl-12 welcome_text">
+                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 ">
+                                <div class="header_wrapper">
                                     <h5 class="welcome">Welcome!</h5>
                                     <h2 class="client_name">
                                         @if ( Auth::check() )
@@ -171,8 +162,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row jobs_wrapper">
-                            @yield('jcontent')
+                        <div class="row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                <div class="sidenav">
+                                   <a href="/client" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'client') ? 'active' : '' }}">Calendar</a>
+                                    <a href="/projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'projects') ? 'active' : '' }}">Projects</a>
+                                    <a href="/order_overview" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'order_overview') ? 'active' : '' }}">Orders</a>
+                                    <a href="/add_projects" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'add_projects') ? 'active' : '' }}">Add A Project</a>
+                                </div>
+                            </div>
+                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
+                                <div class="jobs_wrapper">
+                                    @yield('jcontent')
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

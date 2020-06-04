@@ -6,6 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Projects;
 
+use App\User;
+
+use App\Service;
+
+use App\Order;
+
+use DB;
+
+
+use DataTables;
+
 
 class adminController extends Controller
 {
@@ -19,10 +30,17 @@ class adminController extends Controller
 
     public function admin_manage_project(){
 
-    	$project_overview = Projects::all();
+    	return view('manage_project');
+    }
 
+    public function admin_manage_customers(){
+        
+        return view('admin_users');   
+    }
 
-    	return view('manage_project', compact('project_overview'));
+    public function admin_show_orders(){
+
+        return view('admin_orders');   
     }
 
     public function edit_project(Request $request){
@@ -49,5 +67,87 @@ class adminController extends Controller
 
 
     	return view('admin_calendar', compact('project_calendar'));
+    }
+
+    public function ajaxshowcustomers(){
+
+        $query = User::all();
+
+        return datatables($query)->make(true);
+    }
+
+    public function ajaxshowcprojects(){
+
+        $query = Projects::all();
+
+        return datatables($query)
+        ->addColumn('action', function($row){
+               $btn = '<a type="button"  data-id="'.$row->id.'" class="btn btn-primary btn_p_overview" data-toggle="modal" data-target="#exampleModal"
+
+                    p_id = "'.$row->id.'"
+                    p_client_id = "'.$row->client_id.'"
+                    p_client_name = "'.$row->client_name.'"
+                    p_client_email = "'.$row->client_email.'"
+                    p_client_pnumber = "'.$row->cline_pnumber.'"
+                    p_job_name = "'.$row->job_name.'"
+                    p_cost = "'.$row->cost.'"
+                    p_desc = "'.$row->description.'"
+                    p_start_date = "'.$row->start_date.'"
+                    p_end_date = "'.$row->end_date.'"
+                    p_location = "'.$row->location.'"
+                    p_status = "'.$row->status.'"
+
+                   ><i class="fa fa-gear"></i>&nbsp;Manage</a>';
+
+               return $btn;
+            })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+
+    public function ajaxshoworders(){
+
+        $query = Order::all();
+
+        return datatables($query)
+        ->make(true);
+    }
+
+    public function admin_services(){
+
+        $services = Service::all();
+
+        return view('services', compact('services')); 
+    }
+
+    public function edit_services(Request $request){
+
+        $edit_service = Service::find($request->txt_se_id);
+        $edit_service->service_name = $request->txt_se_service_name;
+        $edit_service->service_cost = $request->txt_se_cost;
+        
+        $edit_service->save();
+
+        return redirect()->back();
+    }
+
+    public function delete_services($id){
+
+        DB::table('services')->where('id', $id)->delete();
+
+        return redirect()->back();
+
+    }
+
+    public function create_services(Request $request){
+
+        $service = new Service;
+
+        $service->service_name = $request->get('job_name');
+        $service->service_cost = $request->get('cost');
+
+        $service->save();
+
+        return redirect('services');
     }
 }

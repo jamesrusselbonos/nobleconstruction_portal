@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Noble Construction Portal</title>
 
      <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -70,13 +70,13 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Noble Construction Portal
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <!-- <span class="navbar-toggler-icon"></span> -->
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -124,9 +124,9 @@
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-6">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
                         <div class="card">
-                            <div class="">Admin {{ __('Login') }}</div>
+                            <div class="" style="color: #fff;">Admin {{ __('Login') }}</div>
 
                             <div class="card-body">
                                 <form method="POST" action="{{ route('admin.login.submit') }}">
@@ -135,7 +135,7 @@
                                     <div class="form-group row">
                                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                             @error('email')
@@ -149,7 +149,7 @@
                                     <div class="form-group row">
                                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                             @error('password')

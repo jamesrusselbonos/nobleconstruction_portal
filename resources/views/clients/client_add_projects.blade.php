@@ -19,14 +19,24 @@
 			 	<input name="client_id" type="hidden" class="form-control" value="{{ Auth::user()->id }}">
 			 </div>
 			 <div class="col-xl-12"> 
+			 	<input name="client_address" type="hidden" class="form-control" value="{{ Auth::user()->client_address }}">
+			 </div>
+			 <div class="col-xl-12"> 
 			 	<input name="job_status" type="hidden" class="form-control" value="Pending">
 			 </div>
 		</div>
 		<div class="row form-group">
 		    <div class="col-xl-6">
-		    	<label for="exampleInputEmail1">Job Name</label>
-		    	<input name="job_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-		    	<small id="emailHelp" class="form-text text-muted">Please type what project you want us to do.</small>
+		    	<label for="id_label_single">
+		    	  	Service
+		    	</label>
+		    	<select class="js-example-basic-single form-control" name="job_name">
+		    			<option>Select service</option>
+		    		@foreach($services as $service)
+		    			<option class="select_option" id="{{ $service->id }}" value="{{ $service->service_name }}" ser_cost="{{ $service->service_cost }}">{{ $service->service_name }}</option>
+		    		@endforeach
+		    	</select>
+		    	<!-- <small id="emailHelp" class="form-text text-muted">Please type what project you want us to do.</small> -->
 		    </div>
 		    <div class="col-xl-6">
 		    	<label for="exampleInputPassword1">Cost</label>
@@ -34,7 +44,7 @@
 		    	    <div class="input-group-prepend">
 		    	        <div class="input-group-text">$</div>
 		    	    </div>
-		    	    <input name="cost" type="number" class="form-control" id="inlineFormInputGroup" placeholder="0.00" step=".01">
+		    	    <input name="cost" type="number" class="form-control cost" id="inlineFormInputGroup" placeholder="0.00" step=".01">
 		    	</div>
 		    </div>
 		</div>
@@ -63,6 +73,20 @@
 		   <button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>
+
+<script>
+	$(document).ready(function() {
+	     $('.js-example-basic-single').select2();
+
+	     $('.js-example-basic-single').change(function(event){
+
+	     	var option = $('.select_option:selected', this).attr('ser_cost');
+
+	     	$('.cost').val(option);
+
+	     });
+	});
+</script>
 
 	
 @endsection

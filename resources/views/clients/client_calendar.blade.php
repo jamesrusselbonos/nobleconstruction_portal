@@ -23,6 +23,7 @@
          	plugins: [ 'interaction'],
          	selectable: true,
          	selectHelper: true,
+         	height: "auto",
          	editable: true,
          	 events : [
          	 	@foreach($project_calendar as $projects_calendar)
