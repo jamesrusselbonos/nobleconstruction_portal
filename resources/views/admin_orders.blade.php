@@ -4,23 +4,27 @@
 
 	<div class="row">
 		<div class="col-xl-12">
-			<table class="mdl-data-table" id="addDataTable">
-	          	<thead style="width:100%">
-	            	<tr>
-	              		
-	              		<th scope="col">Client Name</th>
-	              		<th scope="col">Job Name</th>
-	              		<th scope="col">Cost</th>
-	              		<th scope="col">Email</th>
-	              		<th scope="col">Phone Number</th>
-	              		<th scope="col">Address</th>
-	            	</tr>
-	          	</thead>
-	          	<tbody>
-	      	
-	      			
-	          	</tbody>
-	        </table>
+			<div class="card2">
+				<div class="card-body">
+					<table class="mdl-data-table" id="addDataTable">
+			          	<thead style="width:100%">
+			            	<tr>
+			              		
+			              		<th scope="col">Client Name</th>
+			              		<th scope="col">Job Name</th>
+			              		<th scope="col">Cost</th>
+			              		<th scope="col">Email</th>
+			              		<th scope="col">Phone Number</th>
+			              		<th scope="col">Address</th>
+			            	</tr>
+			          	</thead>
+			          	<tbody>
+			      	
+			      			
+			          	</tbody>
+			        </table>
+				</div>
+			</div>
 		</div>
 	</div>
 

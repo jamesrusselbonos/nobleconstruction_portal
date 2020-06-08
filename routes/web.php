@@ -25,7 +25,9 @@ Route::post('/back', 'admin_loginController@login')->name('admin.login.submit');
 
 Route::get('/admin_main', 'adminController@admin_calendar_view');
 
-Route::get('/manage_project', 'adminController@admin_manage_project')->name('admin.dashboard');
+Route::get('/admin_dashboard', 'adminController@dashboard')->name('admin.dashboard');
+
+Route::get('/manage_project', 'adminController@admin_manage_project');
 Route::post('/manage_project/1', 'adminController@edit_project')->name('admin.edit_project');
 
 Route::get('/manage_customers', 'adminController@admin_manage_customers');

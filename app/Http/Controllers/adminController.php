@@ -12,6 +12,10 @@ use App\Service;
 
 use App\Order;
 
+use App\Charts\projectchart;
+
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+
 use DB;
 
 
@@ -26,6 +30,56 @@ class adminController extends Controller
         $this->middleware('revalidate');
 
         $this->middleware('auth:admin');
+    }
+
+    public function dashboard(){
+
+        $project = Projects::all();
+
+        $project_pending = Projects::where('status', 'pending')->count();
+        $project_in_progress = Projects::where('status', 'In Progress')->count();
+        $project_finished = Projects::where('status', 'Finished')->count();
+        $project_cancelled = Projects::where('status', 'Cancelled')->count();
+
+        $customer = User::orderBy('created_at', 'DESC')->get();;
+
+        $total_customer = User::all()->count();
+
+        $data = Projects::groupBy('created_at')
+            ->get()
+            ->map(function ($item) {
+                // Return the number of persons with that age
+                return count($item);
+            });
+        
+        $chart = new projectchart;
+        $chart->labels($data->keys());
+        $chart->dataset('My dataset', 'line', $data->values())->options([
+            'borderColor' => '#5bc0de',
+            'fill'=> false,
+        ]);
+        // $chart->dataset('In Progress', 'line', [2, 3, 3, 4])->options([
+        //     'borderColor' => '#fd7e14',
+        //     'fill'=> false,
+        // ]);
+        // $chart->dataset('Finished', 'line', [2, 4, 5, 4])->options([
+        //     'borderColor' => '#5cb85c',
+        //     'fill'=> false,
+        // ]);
+        // $chart->dataset('Cancelled', 'line', [1, 1, 3, 2])->options([
+        //     'borderColor' => '#d9534f',
+        //     'fill'=> false,
+        // ]);
+
+        $chart2 = new projectchart;
+        $chart2->labels(['One', 'Two', 'Three', 'Four']);
+        $chart2->dataset('My dataset', 'bar', [1, 2, 3, 4])->options([
+            'borderColor' => '#c39331',
+            'fill'=> false,
+        ]);
+       
+
+        return view('admin_dashboard', compact('project', 'customer', 'project_pending', 'project_in_progress', 'project_finished', 'project_cancelled', 'total_customer', 'chart', 'chart2'));
     }
 
     public function admin_manage_project(){

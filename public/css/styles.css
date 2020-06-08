@@ -27,6 +27,7 @@ p{
 
 h1, h2, h3, h4, h5, h6, label, .navbar-brand, #navbarDropdown{
 	color: #fff;
+	margin: 0;
 }
 
 .dropdown-menu{
@@ -158,8 +159,20 @@ input, textarea, select{
 	color: #fff !important;
 }
 
-.card-header, .card-body{
+.card-body{
 	color: #fff !important;
+}
+
+.card-header{
+	color: #fff !important;
+
+	border-bottom-width: 2px;
+	border-color: #252525 !important;
+}
+
+.card-header h5{
+	margin-top: 0px;
+	font-size: 1em;
 }
 
 .form-check-input{
@@ -327,8 +340,8 @@ input, textarea, select{
 
 .jobs_wrapper{
 	padding: 30px;
-	background-color: #131313;
-	border-radius: 30px;
+	background-color: #060606;
+	border-radius: 15px;
 	width: auto;
 
 	/*-webkit-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
@@ -366,9 +379,77 @@ input, textarea, select{
 	border: none !important;
 	padding: 20px;
 	margin-top: 50px;
-	border-radius: 30px !important;
+	border-radius: 15px !important;
 
 	background-color: #131313 !important;
+
+	/*-webkit-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	-moz-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);*/
+}
+
+.card2{
+	border: none !important;
+	padding: 10px;
+	border-radius: 15px !important;
+
+	background-color: #131313 !important;
+
+	/*-webkit-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	-moz-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);*/
+}
+
+.card_pending{
+	border: none !important;
+	padding: 10px;
+	border-radius: 15px !important;
+
+	background-color: #5bc0de !important;
+
+	text-align: center;
+
+	/*-webkit-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	-moz-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);*/
+}
+
+.card_in_progress{
+	border: none !important;
+	padding: 10px;
+	border-radius: 15px !important;
+
+	background-color: #fd7e14 !important;
+
+	text-align: center;
+
+	/*-webkit-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	-moz-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);*/
+}
+
+.card_finished{
+	border: none !important;
+	padding: 10px;
+	border-radius: 15px !important;
+
+	background-color: #5cb85c !important;
+
+	text-align: center;
+
+	/*-webkit-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	-moz-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
+	box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);*/
+}
+
+.card_cancelled{
+	border: none !important;
+	padding: 10px;
+	border-radius: 15px !important;
+
+	background-color: #d9534f !important;
+
+	text-align: center;
 
 	/*-webkit-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
 	-moz-box-shadow: 0px 10px 11px -1px rgba(89,88,89,0.4);
@@ -383,7 +464,7 @@ input, textarea, select{
 	/*background-color: #c39331 !important;*/
 	/*border-color: #c39331 !important;*/
 	color: #fff !important;
-	border-radius: 30px !important;
+	border-radius: 15px !important;
 }
 
 #sidebar-wrapper {
@@ -418,7 +499,7 @@ input, textarea, select{
 
 .list-group-item-action:hover{
 	border: none !important;
-	border-radius: 30px;
+	border-radius: 15px;
 	color: #fff !important;
 
 	z-index: 10;
@@ -466,11 +547,20 @@ input, textarea, select{
 
 
 .sidenav{
+	padding-top: 18px;
 	display: block;
+
+	position: -webkit-sticky;
+	position: sticky;
+	top: 20px;
 }
 
 .main_content{
 	padding-left: 50px;
+}
+
+.header_wrapper{
+	padding-left: 35px;
 }
 
 
