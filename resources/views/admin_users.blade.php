@@ -4,20 +4,24 @@
 
 	<div class="row">
 		<div class="col-xl-12">
-			<table class="mdl-data-table" id="addDataTable">
-	          	<thead style="width:100%">
-	            	<tr>
-	              		<th scope="col" style="min-width: 150px;">Name</th>
-	              		<th scope="col" style="min-width: 150px;">Email</th>
-	              		<th scope="col" style="min-width: 100px;">Phone Number</th>
-	              		<th scope="col" style="min-width: 200px;">Address</th>
-	              		<th scope="col" style="min-width: 200px;">Date Created</th>
-	            	</tr>
-	          	</thead>
-	          	<tbody>
+			<div class="card2">
+				<div class="card-body">
+					<table class="mdl-data-table" id="addDataTable">
+			          	<thead style="width:100%">
+			            	<tr>
+			              		<th scope="col" style="min-width: 150px;">Name</th>
+			              		<th scope="col" style="min-width: 150px;">Email</th>
+			              		<th scope="col" style="min-width: 100px;">Phone Number</th>
+			              		<th scope="col" style="min-width: 200px;">Address</th>
+			              		<th scope="col" style="min-width: 200px;">Date Created</th>
+			            	</tr>
+			          	</thead>
+			          	<tbody>
 
-	          	</tbody>
-	        </table>
+			          	</tbody>
+			        </table>
+				</div>
+			</div>
 		</div>
 	</div>
 

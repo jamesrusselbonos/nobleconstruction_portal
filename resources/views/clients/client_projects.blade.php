@@ -4,77 +4,81 @@
 
 	<div class="row">
 		<div class="col-xl-12">
-			<table class="mdl-data-table" id="addDataTable">
-	          	<thead style="width:100%">
-	            	<tr>
-	            		<th scope="col"style="max-width: 150px;">Action</th>
-	              		<th scope="col">Job Name</th>
-	              		<th scope="col">Status</th>
-	              		<th scope="col">Start Date</th>
-	              		<th scope="col">Finish Date</th>
-	              		<th scope="col">Cost</th>
-	              		<th scope="col">Description</th>
-	              		<th scope="col">Location</th>
-	            	</tr>
-	          	</thead>
-	          	<tbody>
-	      	
-	      			@foreach($project_overview as $projects_overview)
-		            	<tr>
+			<div class="card2">
+				<div class="card-body">
+					<table class="mdl-data-table" id="addDataTable">
+			          	<thead style="width:100%">
+			            	<tr>
+			            		<th scope="col"style="max-width: 150px;">Action</th>
+			              		<th scope="col">Job Name</th>
+			              		<th scope="col">Status</th>
+			              		<th scope="col">Start Date</th>
+			              		<th scope="col">Finish Date</th>
+			              		<th scope="col">Cost</th>
+			              		<th scope="col">Description</th>
+			              		<th scope="col">Location</th>
+			            	</tr>
+			          	</thead>
+			          	<tbody>
+			      	
+			      			@foreach($project_overview as $projects_overview)
+				            	<tr>
 
-		            		<td scope="row" style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-		             			<span style="float: left;">
-									<a type="button" id="{{$projects_overview->id}}" class="btn btn-primary btn_p_overview" data-toggle="modal" data-target="#exampleModal"
+				            		<td scope="row" style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+				             			<span style="float: left;">
+											<a type="button" id="{{$projects_overview->id}}" class="btn btn-primary btn_p_overview" data-toggle="modal" data-target="#exampleModal"
 
-									p_id = "{{$projects_overview->id}}"
-									p_client_name = "{{$projects_overview->client_name}}"
-									p_client_email = "{{$projects_overview->client_email}}"
-									p_client_pnumber = "{{$projects_overview->cline_pnumber}}"
-									p_client_id = "{{$projects_overview->client_id}}"
-									p_job_name = "{{$projects_overview->job_name}}"
-									p_cost = "{{$projects_overview->cost}}"
-									p_desc = "{{$projects_overview->description}}"
-									p_start_date = "{{$projects_overview->start_date}}"
-									p_end_date = "{{$projects_overview->end_date}}"
-									p_location = "{{$projects_overview->location}}"
-									p_status = "{{$projects_overview->status}}"
+											p_id = "{{$projects_overview->id}}"
+											p_client_name = "{{$projects_overview->client_name}}"
+											p_client_email = "{{$projects_overview->client_email}}"
+											p_client_pnumber = "{{$projects_overview->cline_pnumber}}"
+											p_client_id = "{{$projects_overview->client_id}}"
+											p_job_name = "{{$projects_overview->job_name}}"
+											p_cost = "{{$projects_overview->cost}}"
+											p_desc = "{{$projects_overview->description}}"
+											p_start_date = "{{$projects_overview->start_date}}"
+											p_end_date = "{{$projects_overview->end_date}}"
+											p_location = "{{$projects_overview->location}}"
+											p_status = "{{$projects_overview->status}}"
 
-									>
-	                            	<i class="fa fa-eye" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>View</a>
-								</span>
-		             		</td>
+											>
+			                            	<i class="fa fa-eye" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>View</a>
+										</span>
+				             		</td>
 
-		              		<td scope="row" style="max-width: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-		              		{{$projects_overview->job_name}}
-		              		</td>
+				              		<td scope="row" style="max-width: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+				              		{{$projects_overview->job_name}}
+				              		</td>
 
-		              		<td scope="row" style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-		              		{{$projects_overview->status}}
-		              		</td>
+				              		<td scope="row" style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+				              		{{$projects_overview->status}}
+				              		</td>
 
-		              		<td scope="row">
-		              		{{$projects_overview->start_date}}
-		              		</td>
+				              		<td scope="row">
+				              		{{$projects_overview->start_date}}
+				              		</td>
 
-		              		<td scope="row">
-		              		{{$projects_overview->end_date}}
-		              		</td>
+				              		<td scope="row">
+				              		{{$projects_overview->end_date}}
+				              		</td>
 
-		              		<td scope="row">
-		              		${{$projects_overview->cost}}
-		              		</td>
-		              
-		              		<td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-		              		{{$projects_overview->description}}
-		              		</td>
+				              		<td scope="row">
+				              		${{$projects_overview->cost}}
+				              		</td>
+				              
+				              		<td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+				              		{{$projects_overview->description}}
+				              		</td>
 
-		              		<td scope="row" style="max-width: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-		              		{{$projects_overview->location}}
-		              		</td>
-		            	</tr>
-	      			@endforeach 
-	          	</tbody>
-	        </table>
+				              		<td scope="row" style="max-width: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+				              		{{$projects_overview->location}}
+				              		</td>
+				            	</tr>
+			      			@endforeach 
+			          	</tbody>
+			        </table>
+				</div>
+			</div>
 		</div>
 	</div>
 

@@ -66,6 +66,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-minimal.css">
 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
 
 
 </head>
@@ -103,6 +105,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <div class="sidenav_mobile">
+                                   <a href="/admin_dashboard" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_dashboard') ? 'active' : '' }}">Dashboard</a>
                                    <a href="/admin_main" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_main') ? 'active' : '' }}">Calendar</a>
                                    <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
                                    <a href="/manage_customers" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_customers') ? 'active' : '' }}">Customers</a>
@@ -157,7 +160,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                                <div class="sidenav">
+                                <div class="sidenav" id="sidenav">
+                                   <a href="/admin_dashboard" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_dashboard') ? 'active' : '' }}">Dashboard</a>
                                    <a href="/admin_main" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'admin_main') ? 'active' : '' }}">Calendar</a>
                                    <a href="/manage_project" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_project') ? 'active' : '' }}">Projects</a>
                                    <a href="/manage_customers" class="list-group-item list-group-item-action {{ (request()->segment(1) == 'manage_customers') ? 'active' : '' }}">Customers</a>
@@ -190,12 +194,10 @@
     
 
     <!-- Menu Toggle Script -->
-    <!-- <script>
-        $("#menu-toggle").click(function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled");
-        });
-    </script> -->
-
+  <!--   <script>
+        
+        
+    </script>
+ -->
 </body>
 </html>

@@ -12,6 +12,10 @@ use App\Service;
 
 use App\Order;
 
+use App\Charts\projectchart;
+
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+
 use DB;
 
 
@@ -26,6 +30,45 @@ class adminController extends Controller
         $this->middleware('revalidate');
 
         $this->middleware('auth:admin');
+    }
+
+    public function dashboard(){
+
+        $project = Projects::all();
+
+        $project_pending = Projects::where('status', 'pending')->count();
+        $project_in_progress = Projects::where('status', 'In Progress')->count();
+        $project_finished = Projects::where('status', 'Finished')->count();
+        $project_cancelled = Projects::where('status', 'Cancelled')->count();
+
+        $customer = User::orderBy('created_at', 'DESC')->get();;
+
+        $total_customer = User::all()->count();
+
+        $chart_options = [
+            'chart_title' => 'Projects by months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Projects',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'month',
+            'chart_type' => 'line',
+        ];
+
+        $chart = new LaravelChart($chart_options);
+
+        $chart_options = [
+            'chart_title' => 'Customers by months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\User',
+            'group_by_field' => 'created_at',
+            'chart_type' => 'bar',
+            'filter_field' => 'created_at',
+            'group_by_period' => 'month', // show users only registered this month
+        ];
+
+        $chart2 = new LaravelChart($chart_options);
+
+        return view('admin_dashboard', compact('project', 'customer', 'project_pending', 'project_in_progress', 'project_finished', 'project_cancelled', 'total_customer', 'chart', 'chart2'));
     }
 
     public function admin_manage_project(){

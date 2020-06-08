@@ -166,6 +166,8 @@ return [
 
         Yajra\DataTables\DataTablesServiceProvider::class,
 
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

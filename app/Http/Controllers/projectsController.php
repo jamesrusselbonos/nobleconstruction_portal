@@ -116,7 +116,7 @@ class projectsController extends Controller
 
         $services = Service::all();
 
-        return view('clients/client_add_projects', compact('project_overview', 'services'));
+        return view('clients/client_add_projects', compact('services'));
     }
 
     public function order_overview(){
