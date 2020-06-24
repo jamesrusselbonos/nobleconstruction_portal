@@ -11,8 +11,8 @@
 			          	<thead style="width:100%">
 			            	<tr>
 			              		<th scope="col" style="max-width: 160px;">Action</th>
-			              		<th scope="col" style="max-width: 188px;">Client Name</th>
-			              		<th scope="col" style="max-width: 150px;">Job Name</th>
+			              		<th scope="col" style="max-width: 188px;">Service</th>
+			              		<th scope="col" style="max-width: 150px;">Cost</th>
 			            	</tr>
 			          	</thead>
 			          	<tbody>

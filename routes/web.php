@@ -26,11 +26,13 @@ Route::post('/back', 'admin_loginController@login')->name('admin.login.submit');
 Route::get('/admin_main', 'adminController@admin_calendar_view');
 
 Route::get('/admin_dashboard', 'adminController@dashboard')->name('admin.dashboard');
+Route::post('/admin_dashboard/1', 'adminController@edit_account')->name('admin.account.edit');
 
 Route::get('/manage_project', 'adminController@admin_manage_project');
 Route::post('/manage_project/1', 'adminController@edit_project')->name('admin.edit_project');
 
 Route::get('/manage_customers', 'adminController@admin_manage_customers');
+Route::get('/manage_customers/{id}', 'adminController@delete_customer')->name('admin.customer.delete');
 
 Route::get('/orders', 'adminController@admin_show_orders');
 

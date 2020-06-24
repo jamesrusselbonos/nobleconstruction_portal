@@ -155,6 +155,9 @@
                                         @endif
                                         
                                     </h6>
+                                    <span>
+                                        <a type="button" class="btn btn-primary btn_edit" id="{{ Auth::user()->id }}" data-toggle="modal" data-target="#editaccountmodal"><i class="fa fa-edit"></i>&nbsp;Edit Admin account</a>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -174,6 +177,59 @@
                                     @yield('admin_content')
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="editaccountmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="exampleModalLabel">Edit Admin Account</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <form method="POST" action="{{route('admin.account.edit')}}">
+                                            @csrf
+                                            <div class="row form-group">
+                                                <div class="col-xl-12">
+                                                    <input type="hidden" name="edit_acc_id" value="{{ Auth::user()->id }}">
+
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <label for="exampleInputEmail1">Name</label>
+                                                    <input name="adit_acc_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ Auth::user()->name }}">
+                                                    <!-- <small id="emailHelp" class="form-text text-muted">Please type what project you want us to do.</small> -->
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <label for="exampleInputEmail1">Email</label>
+                                                    <input name="adit_acc_email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ Auth::user()->email }}">
+                                                    <!-- <small id="emailHelp" class="form-text text-muted">Please type what project you want us to do.</small> -->
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <label for="exampleInputEmail1">New password</label>
+                                                    <input name="adit_acc_password" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                                                    <small id="emailHelp" class="form-text text-muted">If you don't want to edit your password, just input your current password</small>
+                                                    <!-- <small id="emailHelp" class="form-text text-muted">Please type what project you want us to do.</small> -->
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <button type="submit" style="margin-top: 20px;" class="btn btn-primary">Edit account</button>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">Edit Project</button>
+                                            </div> -->
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Edit Project</button>
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -9,11 +9,12 @@
 					<table class="mdl-data-table" id="addDataTable">
 			          	<thead style="width:100%">
 			            	<tr>
+			            		<th scope="col" style="min-width: 100px;">Action</th>
 			              		<th scope="col" style="min-width: 150px;">Name</th>
 			              		<th scope="col" style="min-width: 150px;">Email</th>
 			              		<th scope="col" style="min-width: 100px;">Phone Number</th>
 			              		<th scope="col" style="min-width: 200px;">Address</th>
-			              		<th scope="col" style="min-width: 200px;">Date Created</th>
+			              		
 			            	</tr>
 			          	</thead>
 			          	<tbody>
@@ -42,11 +43,12 @@
                 "serverSide": true,
                 "ajax": "{{ route('admin.ajaxshowcustomers') }}",
                 "columns": [
+                	{ "data": "action", orderable: false, searchable: false },
                     { "data": "name" },
                     { "data": "email" },
                     { "data": "phone_number" },
-                    { "data": "client_address" },
-                    { "data": "created_at" }
+                    { "data": "client_address" }
+               
                 ]
 	        });
 

@@ -12,6 +12,8 @@ use App\Service;
 
 use App\Order;
 
+use App\Admin;
+
 use App\Charts\projectchart;
 
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
@@ -45,7 +47,6 @@ class adminController extends Controller
 
         $total_customer = User::all()->count();
 
-<<<<<<< HEAD
         $chart_options = [
             'chart_title' => 'Projects by months',
             'report_type' => 'group_by_date',
@@ -68,41 +69,6 @@ class adminController extends Controller
         ];
 
         $chart2 = new LaravelChart($chart_options);
-=======
-        $data = Projects::groupBy('created_at')
-            ->get()
-            ->map(function ($item) {
-                // Return the number of persons with that age
-                return count($item);
-            });
-        
-        $chart = new projectchart;
-        $chart->labels($data->keys());
-        $chart->dataset('My dataset', 'line', $data->values())->options([
-            'borderColor' => '#5bc0de',
-            'fill'=> false,
-        ]);
-        // $chart->dataset('In Progress', 'line', [2, 3, 3, 4])->options([
-        //     'borderColor' => '#fd7e14',
-        //     'fill'=> false,
-        // ]);
-        // $chart->dataset('Finished', 'line', [2, 4, 5, 4])->options([
-        //     'borderColor' => '#5cb85c',
-        //     'fill'=> false,
-        // ]);
-        // $chart->dataset('Cancelled', 'line', [1, 1, 3, 2])->options([
-        //     'borderColor' => '#d9534f',
-        //     'fill'=> false,
-        // ]);
-
-        $chart2 = new projectchart;
-        $chart2->labels(['One', 'Two', 'Three', 'Four']);
-        $chart2->dataset('My dataset', 'bar', [1, 2, 3, 4])->options([
-            'borderColor' => '#c39331',
-            'fill'=> false,
-        ]);
-       
->>>>>>> 6fb3bc7f176063d7241015a63de96f03f5675cab
 
         return view('admin_dashboard', compact('project', 'customer', 'project_pending', 'project_in_progress', 'project_finished', 'project_cancelled', 'total_customer', 'chart', 'chart2'));
     }
@@ -152,7 +118,14 @@ class adminController extends Controller
 
         $query = User::all();
 
-        return datatables($query)->make(true);
+        return datatables($query)
+        ->addColumn('action', function($row){
+               $btn = '<a href="/manage_customers/'.$row->id.'" type="button" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Delete</a>';
+
+               return $btn;
+            })
+        ->rawColumns(['action'])
+        ->make(true);
     }
 
     public function ajaxshowcprojects(){
@@ -228,5 +201,23 @@ class adminController extends Controller
         $service->save();
 
         return redirect('services');
+    }
+
+    public function delete_customer($id){
+        DB::table('users')->where('id', $id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function edit_account(Request $request){
+
+        $edit_account = Admin::find($request->edit_acc_id);
+        $edit_account->name = $request->adit_acc_name;
+        $edit_account->email = $request->adit_acc_email;
+        $edit_account->password = bcrypt($request->adit_acc_password);
+        
+        $edit_account->save();
+
+        return redirect()->back();
     }
 }

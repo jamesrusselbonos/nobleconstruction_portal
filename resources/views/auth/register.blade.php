@@ -85,7 +85,7 @@
                             <div class="col-md-8">
                                <!-- <input name="phone_number" id="phone_number" type="tel" class="form-control"> -->
 
-                               <input type="tel"name ="phone_number" id="phone1" value="">
+                               <input type="tel"name ="phone_number" id="phone1" value="" required>
 
                                <!-- <input type="tel" class="hide" id="hiden"> -->
                             </div>
@@ -95,7 +95,7 @@
                             <label for="" class="col-md-4 col-form-label text-md-right">Address</label>
 
                             <div class="col-md-8">
-                                <input id="address" type="text" class="form-control" name="client_address">
+                                <input id="address" type="text" class="form-control" name="client_address" required>
                             </div>
                         </div>
 
